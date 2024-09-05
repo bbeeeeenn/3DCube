@@ -1,0 +1,115 @@
+:root {
+    --perspective: 500px;
+
+    --lines-opacity: 0;
+
+    --cube-side-size: 200px;
+    --cube-side-center-offset: 100px;
+    --cube-scale: 1;
+    --cube-bg-opacity: 5;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("spaghetti.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    perspective: var(--perspective);
+    background-color: lightslategray;
+    user-select: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.cube {
+    height: var(--cube-side-size);
+    aspect-ratio: 1/1;
+
+    position: relative;
+    border: 2px solid rgba(255, 0, 0, var(--lines-opacity));
+
+    transform-style: preserve-3d;
+    scale: var(--cube-scale);
+}
+
+.cube::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 2px solid rgba(0, 0, 255, var(--lines-opacity));
+    transform: rotateY(0.25turn);
+}
+
+.cube::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 2px solid rgba(0, 255, 0, var(--lines-opacity));
+    transform: rotateX(0.25turn);
+}
+
+.side {
+    font-weight: 600;
+    font-size: 2em;
+    font-family: sans-serif;
+
+    position: absolute;
+    inset: 0;
+    margin: auto;
+
+    height: var(--cube-side-size);
+    aspect-ratio: 1/1;
+
+    background-color: rgba(255, 255, 255, var(--cube-bg-opacity));
+    border: 2px solid black;
+    color: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.3s;
+}
+
+.side:hover {
+    background-color: #ffffff00;
+}
+
+.side1 {
+    transform: translateZ(var(--cube-side-center-offset));
+}
+
+.side2 {
+    transform: translateZ(calc(var(--cube-side-center-offset) * -1)) rotateY(.5turn);
+}
+
+.side3 {
+    transform: translateX(var(--cube-side-center-offset)) rotateY(0.25turn);
+}
+
+.side4 {
+    transform: translateX(calc(var(--cube-side-center-offset) * -1)) rotateY(-0.25turn);
+}
+
+.side5 {
+    transform: translateY(var(--cube-side-center-offset)) rotateX(-0.25turn);
+}
+
+.side6 {
+    transform: translateY(calc(var(--cube-side-center-offset) * -1)) rotateX(0.25turn);
+}
